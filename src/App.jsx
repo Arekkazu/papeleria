@@ -26,7 +26,18 @@ function App() {
         </header>
 
         <main className="main-content">
-          <p>Contenido pagina</p>
+          <h1>Productos Destacados</h1>
+          <p>Encuentra los mejores productos al mejor precio</p>
+
+          <div className="content-products">
+            <div className="filter-product">
+              <p>Filtros producto</p>
+            </div>
+            <div className="views-product">
+              <div></div>
+              <p>Vista producto</p>
+            </div>
+          </div>
         </main>
 
         <footer className="footer">
