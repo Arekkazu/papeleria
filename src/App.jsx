@@ -10,10 +10,19 @@ function App() {
         <header className="navbar">
           <div className="navbar-logo">
             <img
-              className="logoImg"
-              src="/public/image.png"
+              className="image-logo"
+              src="/public/logo.jpg"
               alt="Logo papeleria"
             />
+          </div>
+          <div className="search">
+            <label htmlFor="search">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3721/3721746.png"
+                alt="icono lupa"
+              />
+            </label>
+            <input type="text" />
           </div>
           <nav className="navbar-links">
             <a href="#">Inicio</a>
@@ -21,7 +30,6 @@ function App() {
             <a href="#">Carrito</a>
             <a href="#">Nosotros</a>
             <a href="#">Iniciar sesión</a>
-            <a href="#">Registrarse</a>
           </nav>
         </header>
 
