@@ -44,7 +44,9 @@ Este proyecto está enfocado en el desarrollo frontend, por lo que se centra en 
 - **public/**: Archivos estáticos como `index.html` y las imágenes.
 - **src/**: Código fuente de la aplicación.
   - **components/**: Componentes reutilizables.
+    |-- **common/**: Componentes comunes.
   - **pages/**: Páginas principales de la aplicación (por ejemplo, página de inicio, productos).
+  - **hooks/**: Hooks personalizados.
   - **assets/**: Archivos estáticos, como imágenes y estilos.
   - **App.js**: Componente principal de la aplicación que contiene la lógica de enrutamiento.
 
