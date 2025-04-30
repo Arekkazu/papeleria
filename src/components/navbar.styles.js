@@ -17,8 +17,8 @@ export const HeaderToolbar = styled(Toolbar)(({ theme }) => ({
 
 // Logo
 export const LogoImage = styled("img")(({ theme }) => ({
-  height: "180px",
-  width: "180px",
+  height: "120px",
+  width: "120px",
 }));
 
 // Barra de búsqueda

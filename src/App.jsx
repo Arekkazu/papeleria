@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-import { Navbar } from './components/Navbar'
-function App() {
-
-
-  return (
-    <>
-    <Navbar />
-=======
-import { useState } from "react";
+import { Navbar } from './components/Navbar';
 import { GlobalStyles } from "@mui/material";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { AboutUsPage } from "./pages/AboutUs/AboutUsPage";
@@ -15,6 +6,7 @@ import { ProductsListPage } from "./pages/Products/ProductsListPage";
 import { ProductsDetailsPage } from "./pages/Products/ProductDetails";
 import { CarPage } from "./pages/Car/CarPage";
 import { RegisterPage } from "./pages/Register/Register";
+
 function App() {
   return (
     <>
@@ -37,10 +29,8 @@ function App() {
       {/* <AboutUsPage /> */}
       {/* <ProductsListPage /> */}
       {/* <ProductsDetailsPage /> */}
-      {/* <CarPage />
-       */}
+      {/* <CarPage /> */}
       {/* <RegisterPage /> */}
->>>>>>> 9c9c17e931e6966aaeb6342ba0ac6af08ad6a1b4
     </>
   );
 }
