@@ -1,7 +1,4 @@
 import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
-// import "./App.css";
 import { GlobalStyles } from "@mui/material";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { AboutUsPage } from "./pages/AboutUs/AboutUsPage";
