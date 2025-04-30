@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { GlobalStyles } from "@mui/material";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { AboutUsPage } from "./pages/AboutUs/AboutUsPage";
