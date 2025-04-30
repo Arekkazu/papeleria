@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import { useState } from "react";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="app-container">
+        <header className="navbar">
+          <div className="navbar-logo">
+            <img
+              className="image-logo"
+              src="/public/logo.jpg"
+              alt="Logo papeleria"
+            />
+          </div>
+          <div className="search">
+            <label htmlFor="search">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3721/3721746.png"
+                alt="icono lupa"
+              />
+            </label>
+            <input type="text" />
+          </div>
+          <nav className="navbar-links">
+            <a href="#">Inicio</a>
+            <a href="#">Productos</a>
+            <a href="#">Carrito</a>
+            <a href="#">Nosotros</a>
+            <a href="#">Iniciar sesión</a>
+          </nav>
+        </header>
+
+        <main className="main-content">
+          <h1>Productos Destacados</h1>
+          <p>Encuentra los mejores productos al mejor precio</p>
+
+          <div className="content-products">
+            <div className="filter-product">
+              <p>Filtros producto</p>
+            </div>
+            <div className="views-product">
+              <div></div>
+              <p>Vista producto</p>
+            </div>
+          </div>
+        </main>
+
+        <footer className="footer">
+          <p>&copy; 2025 Papelería. Todos los derechos reservados.</p>
+        </footer>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
