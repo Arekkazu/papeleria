@@ -1,45 +1,35 @@
-import { AppBar, Toolbar, IconButton, InputBase, Box, Button, Stack} from '@mui/material';
-  import { Search } from '@mui/icons-material';
-  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-  import { faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons';
-  import logo1 from '../img/logo1.jpg';
+import { HeaderToolbar, LogoImage, HeaderSearch, SearchIconStyled, SearchInput, NavButton, NavIconButton } from './navbar.styles';
+
+import { AppBar, Stack, Box } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import logo1 from '../img/logo1.jpg';
+
 export const Navbar = () => {
+  return (
+    <AppBar position="static" color="default" elevation={1}>
+    <HeaderToolbar>
 
-    return(
-        <AppBar position="static" color="default" elevation={1}>
-        <Toolbar className="header-toolbar">
+      <Box sx={{ flex: 1 }}>
+        <LogoImage src={logo1} alt="logo" />
+      </Box>
 
+      <Box sx={{ flex: 2, display: 'flex', justifyContent: 'center' }}>
+        <HeaderSearch>
+          <SearchIconStyled />
+          <SearchInput placeholder="Buscar..." inputProps={{ 'aria-label': 'buscar' }} />
+        </HeaderSearch>
+      </Box>
 
-          <Box className="header-logo">
-            <img src={logo1} alt="logo" className="logo" />
-          </Box>
-  
+      <Stack direction="row" spacing={2} alignItems="center" sx={{ flex: 1, justifyContent: 'flex-end' }}>
+        {['Inicio', 'Quiénes somos', 'Productos'].map((text) => (
+          <NavButton key={text} href="#">{text}</NavButton>
+        ))}
+        <NavIconButton href="#"><FontAwesomeIcon icon={faCartShopping} /></NavIconButton>
+        <NavIconButton href="#"><FontAwesomeIcon icon={faUser} /></NavIconButton>
+      </Stack>
 
-          <Box className="header-search">
-            <Search className="search-icon" />
-            <InputBase
-              placeholder="Buscar..."
-              inputProps={{ 'aria-label': 'buscar' }}
-              className="search-input"
-            />
-          </Box>
-  
-
-          <Stack direction="row" spacing={2} alignItems="center">
-            <Button href='#'  className='nav-button'>Inicio</Button>
-            <Button href='#'  className='nav-button'>Quiénes somos</Button>
-            <Button href='#'  className='nav-button'>Productos</Button>
-            <IconButton  className='nav-button' component="a" href="#">
-            <FontAwesomeIcon icon={faCartShopping} />
-            </IconButton>
-            <IconButton  className='nav-button' component="a" href="#">
-            <FontAwesomeIcon icon={faUser} />
-            </IconButton>
-          </Stack>
-        </Toolbar>
-      </AppBar>
-   
-
-    )
-
-}
+    </HeaderToolbar>
+  </AppBar>
+);
+};

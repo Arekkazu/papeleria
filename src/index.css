@@ -1,54 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.header-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(250, 246, 235);
-}
-
-.nav-button:hover {
-  background-color: rgba(0, 0, 0, 0.08);
-  color: #8CB7D1 !important; 
-  transition: background-color 0.3s ease;
-}
-
-.nav-button{
-  color:#3F5D7D !important;
-}
-
-.logo{
-  height: 150px;
-  width: 150px;
-}
-
-.header-search {
-  position: relative;
-  display: flex;
-  align-items: center;
-  background-color: #8CB7D1;
-  border-radius: 5px;
-  padding-left: 50px;
-  padding-right: 20px;
-  width: 150%;
-  max-width: 650px;
-  height: 60px;
-}
-
-.header-search:hover {
-  background-color: #8CB7D1;
-}
-
-.search-icon {
-  position: absolute;
-  left: 8px;
-  color: #000000;
-}
-
-.search-input {
-  width: 200%;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
