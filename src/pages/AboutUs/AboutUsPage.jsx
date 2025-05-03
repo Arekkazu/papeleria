@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography, Grid } from "@mui/material";
 import { NavBox } from "../../components/common/layouts/NavBarBox/NavBarBox";
 import { FooterBox } from "../../components/common/layouts/FooterBox/FootBox";
-
+import { Footer } from "../../components/footer";
 export const AboutUsPage = () => {
   return (
     <Box
@@ -110,7 +110,9 @@ export const AboutUsPage = () => {
       </main>
       {/* Footer */}
       <footer>
-        <FooterBox />
+        <FooterBox>
+          <Footer /> {/* Exportancion del componente */}
+        </FooterBox>
       </footer>
     </Box>
   );

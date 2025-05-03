@@ -24,8 +24,8 @@ function App() {
           },
         }}
       />
-      <MainPage />
-      {/* <AboutUsPage /> */}
+      {/* <MainPage /> */}
+      <AboutUsPage />
       {/* <ProductsListPage /> */}
       {/* <ProductsDetailsPage /> */}
       {/* <CarPage />

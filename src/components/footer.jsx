@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <Box sx={{ backgroundColor: "#1e1e1e", color: "#fff", py: 4 }}>
       <Container maxWidth="lg">
