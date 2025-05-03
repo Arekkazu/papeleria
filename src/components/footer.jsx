@@ -3,55 +3,69 @@ import {
   Container,
   Grid,
   Typography,
-  Link,
   IconButton,
+  Link,
+  Divider,
 } from "@mui/material";
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";
+import logo1 from "../img/logo1.jpg";
 
-export const Footer = () => {
+const Footer = () => {
   return (
-    <Box sx={{ backgroundColor: "#1e1e1e", color: "#fff", py: 4 }}>
-      <Container maxWidth="lg">
+    <Box sx={{ backgroundColor: "#f5f5f5", color: "#333", mt: 8 }}>
+      <Container maxWidth="lg" sx={{ py: 4 }}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6">Papelería Papeleria</Typography>
-            <Typography variant="body2">
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <img
+                src={logo1}
+                alt="logo"
+                style={{ width: "50px", height: "auto", borderRadius: "8px" }}
+              />
+              <Typography variant="h6" fontWeight="bold">
+                El Palacio del Papel
+              </Typography>
+            </Box>
+            <Typography variant="body2" sx={{ mt: 1 }}>
               Tu sitio confiable de papelería
             </Typography>
           </Grid>
+
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6">Enlaces</Typography>
-            <Link href="#" color="inherit" underline="hover">
-              Inicio
-            </Link>
-            <br />
-            <Link href="#" color="inherit" underline="hover">
-              Productos
-            </Link>
-            <br />
-            <Link href="#" color="inherit" underline="hover">
-              Contacto
-            </Link>
+            <Typography variant="h6" fontWeight="bold" gutterBottom>
+              Enlaces rápidos
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+              {["Inicio", "Quiénes somos", "Productos"].map((text) => (
+                <Link key={text} href="#" color="inherit" underline="hover">
+                  {text}
+                </Link>
+              ))}
+            </Box>
           </Grid>
+
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6">Síguenos</Typography>
-            <IconButton color="inherit">
-              <Facebook />
-            </IconButton>
-            <IconButton color="inherit">
-              <Twitter />
-            </IconButton>
-            <IconButton color="inherit">
-              <Instagram />
-            </IconButton>
+            <Typography variant="h6" fontWeight="bold" gutterBottom>
+              Síguenos
+            </Typography>
+            <Box sx={{ display: "flex", gap: 1 }}>
+              <IconButton color="inherit" size="small">
+                <Facebook />
+              </IconButton>
+              <IconButton color="inherit" size="small">
+                <Twitter />
+              </IconButton>
+              <IconButton color="inherit" size="small">
+                <Instagram />
+              </IconButton>
+            </Box>
           </Grid>
         </Grid>
-        <Box textAlign="center" pt={4}>
-          <Typography variant="body2">
-            © {new Date().getFullYear()} Papelería Papeleria. Todos los derechos
-            reservados.
-          </Typography>
-        </Box>
+
+        <Typography variant="body2" align="center" color="text.secondary">
+          © {new Date().getFullYear()} El Palacio del Papel. Todos los derechos
+          reservados.
+        </Typography>
       </Container>
     </Box>
   );

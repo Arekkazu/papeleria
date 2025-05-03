@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Typography, Grid } from "@mui/material";
-import { NavBox } from "../../components/common/layouts/NavBarBox/NavBarBox";
 import { FooterBox } from "../../components/common/layouts/FooterBox/FootBox";
 import { Footer } from "../../components/footer";
 import { Navbar } from "../../components/navbar";
@@ -15,8 +14,7 @@ export const AboutUsPage = () => {
       }}
     >
       <header>
-        {/* Header */}
-        <Navbar />
+        <Navbar /> {/* Exportacion del componente */}
       </header>
       <main>
         {/* Título principal */}
