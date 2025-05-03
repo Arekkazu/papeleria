@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { GlobalStyles } from "@mui/material";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { AboutUsPage } from "./pages/AboutUs/AboutUsPage";
@@ -6,6 +5,7 @@ import { ProductsListPage } from "./pages/Products/ProductsListPage";
 import { ProductsDetailsPage } from "./pages/Products/ProductDetails";
 import { CarPage } from "./pages/Car/CarPage";
 import { RegisterPage } from "./pages/Register/Register";
+
 function App() {
   return (
     <>
@@ -28,8 +28,7 @@ function App() {
       <AboutUsPage />
       {/* <ProductsListPage /> */}
       {/* <ProductsDetailsPage /> */}
-      {/* <CarPage />
-       */}
+      {/* <CarPage /> */}
       {/* <RegisterPage /> */}
     </>
   );

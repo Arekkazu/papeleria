@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { DiscoverCategory } from "../../components/common/categories/DiscoverCategory";
 import { NavBox } from "../../components/common/layouts/NavBarBox/NavBarBox";
 import { FooterBox } from "../../components/common/layouts/FooterBox/FootBox";
+import { Navbar } from "../../components/Navbar";
 export const MainPage = () => {
   return (
     <Box
@@ -13,7 +14,10 @@ export const MainPage = () => {
       }}
     >
       <header>
-        <NavBox>{/* Seccion de Navbar */}</NavBox>
+        <NavBox>
+          <Navbar />
+
+        </NavBox>
 
         <section>
           {/* Seccion Header */}
