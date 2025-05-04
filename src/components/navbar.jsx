@@ -10,14 +10,14 @@ import {
 import { AppBar, Stack, Box } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import logo1 from "../img/logo1.jpg";
+import logo from "../assets/images/logo/logo1.jpg";
 
 export const Navbar = () => {
   return (
     <AppBar position="static" color="default" elevation={1}>
       <HeaderToolbar>
         <Box sx={{ flex: 1 }}>
-          <LogoImage src={logo1} alt="logo" />
+          <LogoImage src={logo} alt="logo" />
         </Box>
 
         <Box sx={{ flex: 2, display: "flex", justifyContent: "center" }}>
