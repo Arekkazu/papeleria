@@ -29,7 +29,7 @@ const Footer = () => {
           <Grid item xs={12} sm={4}>
             <FooterTitle variant="h6">Enlaces rápidos</FooterTitle>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-              {["Inicio", "Quiénes somos", "Productos"].map((text) => (
+              {["Inicio", "Nosotros", "Productos"].map((text) => (
                 <FooterLink key={text} href="#">
                   {text}
                 </FooterLink>

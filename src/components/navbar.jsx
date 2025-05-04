@@ -36,7 +36,7 @@ export const Navbar = () => {
           alignItems="center"
           sx={{ flex: 1, justifyContent: "flex-end" }}
         >
-          {["Inicio", "Quiénes somos", "Productos"].map((text) => (
+          {["Inicio", "Nosotros", "Productos"].map((text) => (
             <NavButton key={text} href="#">
               {text}
             </NavButton>
