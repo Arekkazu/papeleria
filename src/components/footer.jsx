@@ -1,27 +1,22 @@
 import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-  IconButton,
-  Link,
-  Divider,
-} from "@mui/material";
+  FooterContainer,
+  FooterIconButton,
+  FooterLink,
+  FooterTitle,
+  LogoImg,
+} from "./footer.styles";
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";
-import logo1 from "../img/logo1.jpg";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import logo from "../assets/images/logo/logo1.jpg";
 
 const Footer = () => {
   return (
-    <Box sx={{ backgroundColor: "#f5f5f5", color: "#333", mt: 8 }}>
-      <Container maxWidth="lg" sx={{ py: 4 }}>
+    <FooterContainer component="footer">
+      <Container maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <img
-                src={logo1}
-                alt="logo"
-                style={{ width: "50px", height: "auto", borderRadius: "8px" }}
-              />
+              <LogoImg src={logo} alt="logo" />
               <Typography variant="h6" fontWeight="bold">
                 El Palacio del Papel
               </Typography>
@@ -32,42 +27,38 @@ const Footer = () => {
           </Grid>
 
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
-              Enlaces rápidos
-            </Typography>
+            <FooterTitle variant="h6">Enlaces rápidos</FooterTitle>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
               {["Inicio", "Quiénes somos", "Productos"].map((text) => (
-                <Link key={text} href="#" color="inherit" underline="hover">
+                <FooterLink key={text} href="#">
                   {text}
-                </Link>
+                </FooterLink>
               ))}
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
-              Síguenos
-            </Typography>
+            <FooterTitle variant="h6">Síguenos</FooterTitle>
             <Box sx={{ display: "flex", gap: 1 }}>
-              <IconButton color="inherit" size="small">
+              <FooterIconButton size="small">
                 <Facebook />
-              </IconButton>
-              <IconButton color="inherit" size="small">
+              </FooterIconButton>
+              <FooterIconButton size="small">
                 <Twitter />
-              </IconButton>
-              <IconButton color="inherit" size="small">
+              </FooterIconButton>
+              <FooterIconButton size="small">
                 <Instagram />
-              </IconButton>
+              </FooterIconButton>
             </Box>
           </Grid>
         </Grid>
 
-        <Typography variant="body2" align="center" color="text.secondary">
+        <Typography variant="body2" align="center" color="#777" sx={{ mt: 4 }}>
           © {new Date().getFullYear()} El Palacio del Papel. Todos los derechos
           reservados.
         </Typography>
       </Container>
-    </Box>
+    </FooterContainer>
   );
 };
 
