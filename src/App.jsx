@@ -1,4 +1,3 @@
-import { Navbar } from './components/Navbar';
 import { GlobalStyles } from "@mui/material";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { AboutUsPage } from "./pages/AboutUs/AboutUsPage";
@@ -25,8 +24,8 @@ function App() {
           },
         }}
       />
-      <MainPage />
-      {/* <AboutUsPage /> */}
+      {/* <MainPage /> */}
+      <AboutUsPage />
       {/* <ProductsListPage /> */}
       {/* <ProductsDetailsPage /> */}
       {/* <CarPage /> */}

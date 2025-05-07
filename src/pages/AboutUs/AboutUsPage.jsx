@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Typography, Grid } from "@mui/material";
 import { NavBox } from "../../components/common/layouts/NavBarBox/NavBarBox";
 import { FooterBox } from "../../components/common/layouts/FooterBox/FootBox";
+import { Footer } from "../../components/footer";
+import { Navbar } from "../../components/navbar";
 
 export const AboutUsPage = () => {
   return (
@@ -14,7 +16,7 @@ export const AboutUsPage = () => {
     >
       <header>
         {/* Header */}
-        <NavBox />
+        <Navbar />
       </header>
       <main>
         {/* Título principal */}
@@ -110,7 +112,9 @@ export const AboutUsPage = () => {
       </main>
       {/* Footer */}
       <footer>
-        <FooterBox />
+        <FooterBox>
+          <Footer /> {/* Exportancion del componente */}
+        </FooterBox>
       </footer>
     </Box>
   );
