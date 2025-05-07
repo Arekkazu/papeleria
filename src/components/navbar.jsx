@@ -1,5 +1,4 @@
 import { HeaderToolbar, LogoImage, HeaderSearch, SearchIconStyled, SearchInput, NavButton, NavIconButton } from './navbar.styles';
-
 import { AppBar, Stack, Box } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons';
