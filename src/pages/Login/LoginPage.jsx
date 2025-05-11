@@ -1,3 +1,6 @@
+import Footer from "../../components/footer";
+import { Navbar } from "../../components/navbar";
+
 export const LoginPage = () => {
   return (
     <Box
@@ -9,7 +12,7 @@ export const LoginPage = () => {
     >
       <header>
         <NavBox>
-          <h1>NAVBAR</h1>
+          <Navbar />
         </NavBox>
       </header>
       <main>
@@ -38,9 +41,7 @@ export const LoginPage = () => {
         </Box>
       </main>
       <footer>
-        <FooterBox>
-          <h1>FOOTER</h1>
-        </FooterBox>
+        <Footer />
       </footer>
     </Box>
   );

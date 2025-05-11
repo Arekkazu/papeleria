@@ -14,18 +14,20 @@ function App() {
           "*": {
             margin: 0,
             padding: 0,
+            boxSizing: "border-box",
           },
           body: {
-            fontFamily: "Roboto, sans-serif",
-            backgroundColor: "#f5f5f5",
+            fontFamily: "Inter, Roboto, 'Helvetica Neue', Arial, sans-serif",
+            backgroundColor: "#f5f8fa",
+            color: "#222",
           },
           main: {
             flexGrow: 1,
           },
         }}
       />
-      {/* <MainPage /> */}
-      <AboutUsPage />
+      <MainPage />
+      {/* <AboutUsPage /> */}
       {/* <ProductsListPage /> */}
       {/* <ProductsDetailsPage /> */}
       {/* <CarPage /> */}

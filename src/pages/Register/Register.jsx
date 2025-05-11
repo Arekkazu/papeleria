@@ -1,6 +1,7 @@
 import { NavBox } from "../../components/common/layouts/NavBarBox/NavBarBox";
-import { FooterBox } from "../../components/common/layouts/FooterBox/FootBox";
 import { Box, Grid } from "@mui/material";
+import { Navbar } from "../../components/navbar";
+import Footer from "../../components/footer";
 export const RegisterPage = () => {
   return (
     <Box
@@ -12,7 +13,7 @@ export const RegisterPage = () => {
     >
       <header>
         <NavBox>
-          <h1>NAVBAR</h1>
+          <Navbar />
         </NavBox>
       </header>
       <main>
@@ -41,9 +42,7 @@ export const RegisterPage = () => {
         </Box>
       </main>
       <footer>
-        <FooterBox>
-          <h1>FOOTER</h1>
-        </FooterBox>
+        <Footer />
       </footer>
     </Box>
   );
