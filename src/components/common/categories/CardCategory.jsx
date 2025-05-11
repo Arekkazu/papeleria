@@ -3,42 +3,35 @@ import {
   CardMedia,
   Typography,
   CardActionArea,
-  Button,
   CardContent,
-  CardActions,
   Box,
 } from "@mui/material";
-import imageHolder from "../../../assets/images/categories/imageHolder.png";
 
-export const CardCategory = () => {
+export const CardCategory = ({ name = "Categoría", image }) => {
   return (
-    <Card>
+    <Card sx={{ borderRadius: 3, boxShadow: 2, transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', boxShadow: 5 } }}>
       <CardActionArea>
         <Box
           sx={{
-            height: 180,
+            height: 160,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            p: 2,
+            bgcolor: '#f5f8fa',
+            borderTopLeftRadius: 12,
+            borderTopRightRadius: 12,
           }}
         >
           <CardMedia
             component="img"
-            image={imageHolder}
-            alt="green iguana"
-            sx={{
-              height: 180,
-              objectFit: "contain",
-              mx: "auto",
-              display: "block",
-              p: 2,
-            }}
+            image={image}
+            alt={name}
+            sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
           />
         </Box>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" align="center">
-            Lizard
+          <Typography gutterBottom variant="subtitle1" component="div" align="center" fontWeight={700}>
+            {name}
           </Typography>
         </CardContent>
       </CardActionArea>

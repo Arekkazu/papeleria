@@ -112,9 +112,9 @@ export const AboutUsPage = () => {
       </main>
       {/* Footer */}
       <footer>
-        <FooterBox>
+
           <Footer /> {/* Exportancion del componente */}
-        </FooterBox>
+
       </footer>
     </Box>
   );
