@@ -179,7 +179,7 @@ export const AboutUsPage = () => {
         </Box>
       </main>
       <footer>
-        <Footer />
+        <Footer /> {/* Exportancion del componente */}
       </footer>
     </Box>
   );
