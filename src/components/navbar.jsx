@@ -25,6 +25,7 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/images/logo/logo1.jpg";
+import { useState } from "react";
 
 export const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
