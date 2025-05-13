@@ -7,17 +7,34 @@ import {
   NavButton,
   NavIconButton,
 } from "./navbar.styles";
-import { AppBar, Stack, Box, IconButton, Drawer, List, ListItem, ListItemText, Divider } from "@mui/material";
+import {
+  AppBar,
+  Stack,
+  Box,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faCartShopping, faBars } from "@fortawesome/free-solid-svg-icons";
-import logo1 from "../img/logo1.jpg";
+import {
+  faUser,
+  faCartShopping,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
+import logo from "../assets/images/logo/logo1.jpg";
 import { useState } from "react";
 
 export const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawer = (open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
     setDrawerOpen(open);
@@ -25,14 +42,14 @@ export const Navbar = () => {
 
   const handleDrawerClick = (event) => {
     // Solo cerrar el drawer si el clic fue en el fondo o en un elemento de navegación
-    if (event.target === event.currentTarget || event.target.closest('li')) {
+    if (event.target === event.currentTarget || event.target.closest("li")) {
       toggleDrawer(false)(event);
     }
   };
 
   const handleKeyDown = (event) => {
     // Solo cerrar el drawer si se presiona Escape
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       setDrawerOpen(false);
     }
   };
@@ -43,11 +60,17 @@ export const Navbar = () => {
     <AppBar position="static" color="default" elevation={1}>
       <HeaderToolbar>
         <Box sx={{ flex: 1 }}>
-          <LogoImage src={logo1} alt="logo" />
+          <LogoImage src={logo} alt="logo" />
         </Box>
 
         {/* Barra de búsqueda - visible solo en desktop */}
-        <Box sx={{ flex: 2, display: { xs: 'none', md: 'flex' }, justifyContent: "center" }}>
+        <Box
+          sx={{
+            flex: 2,
+            display: { xs: "none", md: "flex" },
+            justifyContent: "center",
+          }}
+        >
           <HeaderSearch>
             <SearchIconStyled />
             <SearchInput
@@ -62,7 +85,11 @@ export const Navbar = () => {
           direction="row"
           spacing={2}
           alignItems="center"
-          sx={{ flex: 1, justifyContent: "flex-end", display: { xs: 'none', md: 'flex' } }}
+          sx={{
+            flex: 1,
+            justifyContent: "flex-end",
+            display: { xs: "none", md: "flex" },
+          }}
         >
           {menuItems.map((text) => (
             <NavButton key={text} href="#">
@@ -83,7 +110,7 @@ export const Navbar = () => {
           aria-label="open drawer"
           edge="end"
           onClick={toggleDrawer(true)}
-          sx={{ display: { xs: 'flex', md: 'none' } }}
+          sx={{ display: { xs: "flex", md: "none" } }}
         >
           <FontAwesomeIcon icon={faBars} />
         </IconButton>
@@ -95,9 +122,9 @@ export const Navbar = () => {
           onClose={toggleDrawer(false)}
           PaperProps={{
             sx: {
-              width: '100%',
+              width: "100%",
               maxWidth: 320,
-            }
+            },
           }}
         >
           <Box
@@ -108,8 +135,8 @@ export const Navbar = () => {
           >
             {/* Barra de búsqueda en el drawer */}
             <Box sx={{ mb: 3 }}>
-              <HeaderSearch 
-                sx={{ width: '100%' }}
+              <HeaderSearch
+                sx={{ width: "100%" }}
                 onClick={(e) => e.stopPropagation()}
               >
                 <SearchIconStyled />
@@ -127,18 +154,18 @@ export const Navbar = () => {
             {/* Menú de navegación */}
             <List>
               {menuItems.map((text) => (
-                <ListItem 
-                  button 
+                <ListItem
+                  button
                   key={text}
                   sx={{
                     py: 1.5,
-                    '&:hover': {
-                      bgcolor: 'rgba(38, 151, 166, 0.08)',
-                    }
+                    "&:hover": {
+                      bgcolor: "rgba(38, 151, 166, 0.08)",
+                    },
                   }}
                 >
-                  <ListItemText 
-                    primary={text} 
+                  <ListItemText
+                    primary={text}
                     primaryTypographyProps={{
                       fontWeight: 500,
                     }}
@@ -151,33 +178,33 @@ export const Navbar = () => {
 
             {/* Accesos rápidos */}
             <List>
-              <ListItem 
+              <ListItem
                 button
                 sx={{
                   py: 1.5,
-                  '&:hover': {
-                    bgcolor: 'rgba(38, 151, 166, 0.08)',
-                  }
+                  "&:hover": {
+                    bgcolor: "rgba(38, 151, 166, 0.08)",
+                  },
                 }}
               >
-                <ListItemText 
-                  primary="Carrito" 
+                <ListItemText
+                  primary="Carrito"
                   primaryTypographyProps={{
                     fontWeight: 500,
                   }}
                 />
               </ListItem>
-              <ListItem 
+              <ListItem
                 button
                 sx={{
                   py: 1.5,
-                  '&:hover': {
-                    bgcolor: 'rgba(38, 151, 166, 0.08)',
-                  }
+                  "&:hover": {
+                    bgcolor: "rgba(38, 151, 166, 0.08)",
+                  },
                 }}
               >
-                <ListItemText 
-                  primary="Mi cuenta" 
+                <ListItemText
+                  primary="Mi cuenta"
                   primaryTypographyProps={{
                     fontWeight: 500,
                   }}
