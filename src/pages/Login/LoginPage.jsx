@@ -31,7 +31,7 @@ export const LoginPage = () => {
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
               <div style={{ backgroundColor: "red", width: "50px" }}>
-                <p>asd</p>
+                <p>asda</p>
               </div>
             </Grid>
           </Grid>
