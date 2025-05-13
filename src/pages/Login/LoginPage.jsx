@@ -1,3 +1,4 @@
+import { Box, Grid } from "@mui/material";
 import Footer from "../../components/footer";
 import { Navbar } from "../../components/navbar";
 
@@ -11,9 +12,7 @@ export const LoginPage = () => {
       }}
     >
       <header>
-        <NavBox>
-          <Navbar />
-        </NavBox>
+        <Navbar />
       </header>
       <main>
         <Box
@@ -25,18 +24,16 @@ export const LoginPage = () => {
           }}
         >
           <Grid container spacing={2}>
-            {/* EDITAR ACA */}
-            <Grid size={{ xs: 12, sm: 12, md: 6 }}>
+            <Grid item xs={12} sm={12} md={6}>
               <div style={{ backgroundColor: "red", width: "50px" }}>
                 <p>asd</p>
               </div>
             </Grid>
-            <Grid size={{ xs: 12, sm: 12, md: 6 }}>
+            <Grid item xs={12} sm={12} md={6}>
               <div style={{ backgroundColor: "red", width: "50px" }}>
                 <p>asd</p>
               </div>
             </Grid>
-            {/* ---- */}
           </Grid>
         </Box>
       </main>
