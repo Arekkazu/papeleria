@@ -8,6 +8,8 @@ import {
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import logo from "../assets/images/logo/logo1.jpg";
+import { Link as RouterLink } from "react-router-dom";
+
 
 const Footer = () => {
   return (
@@ -29,26 +31,50 @@ const Footer = () => {
           <Grid item xs={12} sm={4}>
             <FooterTitle variant="h6">Enlaces rápidos</FooterTitle>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-              {["Inicio", "Nosotros", "Productos"].map((text) => (
-                <FooterLink key={text} href="#">
-                  {text}
-                </FooterLink>
-              ))}
+                <FooterLink component={RouterLink} to="/">
+                Inicio
+              </FooterLink>
+              <FooterLink component={RouterLink} to="/about">
+                Nosotros
+              </FooterLink>
+              <FooterLink component={RouterLink} to="/products">
+                Productos
+              </FooterLink>
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={4}>
             <FooterTitle variant="h6">Síguenos</FooterTitle>
             <Box sx={{ display: "flex", gap: 1 }}>
-              <FooterIconButton size="small">
-                <Facebook />
-              </FooterIconButton>
-              <FooterIconButton size="small">
-                <Twitter />
-              </FooterIconButton>
-              <FooterIconButton size="small">
-                <Instagram />
-              </FooterIconButton>
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FooterIconButton size="small">
+                  <Facebook />
+                </FooterIconButton>
+              </a>
+
+              <a
+                href="https://www.twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FooterIconButton size="small">
+                  <Twitter />
+                </FooterIconButton>
+              </a>
+
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FooterIconButton size="small">
+                  <Instagram />
+                </FooterIconButton>
+              </a>
             </Box>
           </Grid>
         </Grid>
