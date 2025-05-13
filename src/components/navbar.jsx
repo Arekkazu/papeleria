@@ -26,6 +26,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/images/logo/logo1.jpg";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -41,20 +42,22 @@ export const Navbar = () => {
   };
 
   const handleDrawerClick = (event) => {
-    // Solo cerrar el drawer si el clic fue en el fondo o en un elemento de navegación
     if (event.target === event.currentTarget || event.target.closest("li")) {
       toggleDrawer(false)(event);
     }
   };
 
   const handleKeyDown = (event) => {
-    // Solo cerrar el drawer si se presiona Escape
     if (event.key === "Escape") {
       setDrawerOpen(false);
     }
   };
 
-  const menuItems = ["Inicio", "Quiénes somos", "Productos"];
+  const menuItems = [
+    { label: "Inicio", path: "/" },
+    { label: "Quiénes somos", path: "/about" },
+    { label: "Productos", path: "/products" },
+  ];
 
   return (
     <AppBar position="static" color="default" elevation={1}>
@@ -63,7 +66,7 @@ export const Navbar = () => {
           <LogoImage src={logo} alt="logo" />
         </Box>
 
-        {/* Barra de búsqueda - visible solo en desktop */}
+        {/* Barra de búsqueda */}
         <Box
           sx={{
             flex: 2,
@@ -80,7 +83,7 @@ export const Navbar = () => {
           </HeaderSearch>
         </Box>
 
-        {/* Navegación y botones - visibles solo en desktop */}
+        {/* Navegación en desktop */}
         <Stack
           direction="row"
           spacing={2}
@@ -91,20 +94,24 @@ export const Navbar = () => {
             display: { xs: "none", md: "flex" },
           }}
         >
-          {menuItems.map((text) => (
-            <NavButton key={text} href="#">
-              {text}
-            </NavButton>
+          {menuItems.map(({ label, path }) => (
+            <Link key={label} to={path} style={{ textDecoration: "none" }}>
+              <NavButton>{label}</NavButton>
+            </Link>
           ))}
-          <NavIconButton href="#">
-            <FontAwesomeIcon icon={faCartShopping} />
-          </NavIconButton>
-          <NavIconButton href="#">
-            <FontAwesomeIcon icon={faUser} />
-          </NavIconButton>
+          <Link to="/cart">
+            <NavIconButton>
+              <FontAwesomeIcon icon={faCartShopping} />
+            </NavIconButton>
+          </Link>
+          <Link to="/login">
+            <NavIconButton>
+              <FontAwesomeIcon icon={faUser} />
+            </NavIconButton>
+          </Link>
         </Stack>
 
-        {/* Botón hamburguesa - visible solo en móvil */}
+        {/* Botón hamburguesa en móvil */}
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -115,17 +122,12 @@ export const Navbar = () => {
           <FontAwesomeIcon icon={faBars} />
         </IconButton>
 
-        {/* Drawer para móvil */}
+        {/* Drawer en móvil */}
         <Drawer
           anchor="right"
           open={drawerOpen}
           onClose={toggleDrawer(false)}
-          PaperProps={{
-            sx: {
-              width: "100%",
-              maxWidth: 320,
-            },
-          }}
+          PaperProps={{ sx: { width: "100%", maxWidth: 320 } }}
         >
           <Box
             sx={{ p: 2 }}
@@ -133,44 +135,26 @@ export const Navbar = () => {
             onClick={handleDrawerClick}
             onKeyDown={handleKeyDown}
           >
-            {/* Barra de búsqueda en el drawer */}
             <Box sx={{ mb: 3 }}>
-              <HeaderSearch
-                sx={{ width: "100%" }}
-                onClick={(e) => e.stopPropagation()}
-              >
+              <HeaderSearch sx={{ width: "100%" }}>
                 <SearchIconStyled />
-                <SearchInput
-                  placeholder="Buscar..."
-                  inputProps={{ "aria-label": "buscar" }}
-                  onClick={(e) => e.stopPropagation()}
-                  onKeyDown={(e) => e.stopPropagation()}
-                />
+                <SearchInput placeholder="Buscar..." inputProps={{ "aria-label": "buscar" }} />
               </HeaderSearch>
             </Box>
 
             <Divider sx={{ mb: 2 }} />
 
-            {/* Menú de navegación */}
+            {/* Menú móvil */}
             <List>
-              {menuItems.map((text) => (
-                <ListItem
-                  button
-                  key={text}
-                  sx={{
-                    py: 1.5,
-                    "&:hover": {
-                      bgcolor: "rgba(38, 151, 166, 0.08)",
-                    },
-                  }}
-                >
-                  <ListItemText
-                    primary={text}
-                    primaryTypographyProps={{
-                      fontWeight: 500,
-                    }}
-                  />
-                </ListItem>
+              {menuItems.map(({ label, path }) => (
+                <Link key={label} to={path} style={{ textDecoration: "none", color: "inherit" }}>
+                  <ListItem button sx={{ py: 1.5 }}>
+                    <ListItemText
+                      primary={label}
+                      primaryTypographyProps={{ fontWeight: 500 }}
+                    />
+                  </ListItem>
+                </Link>
               ))}
             </List>
 
@@ -178,38 +162,22 @@ export const Navbar = () => {
 
             {/* Accesos rápidos */}
             <List>
-              <ListItem
-                button
-                sx={{
-                  py: 1.5,
-                  "&:hover": {
-                    bgcolor: "rgba(38, 151, 166, 0.08)",
-                  },
-                }}
-              >
-                <ListItemText
-                  primary="Carrito"
-                  primaryTypographyProps={{
-                    fontWeight: 500,
-                  }}
-                />
-              </ListItem>
-              <ListItem
-                button
-                sx={{
-                  py: 1.5,
-                  "&:hover": {
-                    bgcolor: "rgba(38, 151, 166, 0.08)",
-                  },
-                }}
-              >
-                <ListItemText
-                  primary="Mi cuenta"
-                  primaryTypographyProps={{
-                    fontWeight: 500,
-                  }}
-                />
-              </ListItem>
+              <Link to="/cart" style={{ textDecoration: "none", color: "inherit" }}>
+                <ListItem button sx={{ py: 1.5 }}>
+                  <ListItemText
+                    primary="Carrito"
+                    primaryTypographyProps={{ fontWeight: 500 }}
+                  />
+                </ListItem>
+              </Link>
+              <Link to="/login" style={{ textDecoration: "none", color: "inherit" }}>
+                <ListItem button sx={{ py: 1.5 }}>
+                  <ListItemText
+                    primary="Mi cuenta"
+                    primaryTypographyProps={{ fontWeight: 500 }}
+                  />
+                </ListItem>
+              </Link>
             </List>
           </Box>
         </Drawer>
