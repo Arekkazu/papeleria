@@ -195,7 +195,7 @@ export const MainPage = () => {
         {/* Categorías */}
         <DiscoverCategory />
         {/* Productos destacados */}
-        <FeaturedProductsGrid />
+        {/* <FeaturedProductsGrid /> */}
       </main>
 
       <footer>
