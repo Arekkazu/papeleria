@@ -6,6 +6,6 @@
       { "source": "/cart", "destination": "/" },
       { "source": "/login", "destination": "/" },
       { "source": "/about", "destination": "/" },
-      { "source": "/api"}
+      { "source": "/api",  "destination": "/"}
     ]
   } 
