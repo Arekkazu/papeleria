@@ -6,6 +6,7 @@ import { ProductsListPage } from "./pages/Products/ProductsListPage";
 import { ProductsDetailsPage } from "./pages/Products/ProductDetails";
 import { CarPage } from "./pages/Car/CarPage";
 import { LoginPage } from "./pages/Login/LoginPage";
+import ApiPage from "./pages/ApiPage/ApiPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/product" element={<ProductsDetailsPage />} />
         <Route path="/cart" element={<CarPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/api" element={<ApiPage />} />
       </Routes>
     </BrowserRouter>
     

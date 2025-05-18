@@ -22,20 +22,36 @@ import { useState } from "react";
 import { CheckoutOk } from "../../components/common/snackbar/checkoutOk";
 import { CheckoutBad } from "../../components/common/snackbar/checkoutBad";
 
+const DISCOUNT_KEY = "dragonball_discount";
+
 export const CarPage = () => {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
   const [open, setOpen] = useState(false);
+
+  // Leer descuento de localStorage
+  let descuento = 0;
+  let descuentoLabel = "$0";
+  const discountData = localStorage.getItem(DISCOUNT_KEY);
+  if (discountData) {
+    try {
+      const { discount } = JSON.parse(discountData);
+      const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+      descuento = Math.round(subtotal * discount);
+      descuentoLabel = `-$${descuento.toLocaleString()}`;
+    } catch {}
+  }
 
   // Calcular totales
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0,
   );
-  const descuento = 0; // Aquí podrías aplicar lógica de descuento
   const total = subtotal - descuento;
 
   const handleFinish = () => {
     setOpen(true);
+    // Limpiar descuento al finalizar compra
+    localStorage.removeItem(DISCOUNT_KEY);
   };
 
   const handleClose = () => {
@@ -109,55 +125,26 @@ export const CarPage = () => {
                       </TableCell>
                     </TableRow>
                   ) : (
-                    cart.map((item) => (
-                      <TableRow key={item.name}>
+                    cart.map((item, idx) => (
+                      <TableRow key={item.name + idx}>
                         <TableCell>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 2,
-                            }}
-                          >
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              style={{
-                                width: 48,
-                                height: 48,
-                                objectFit: "contain",
-                                borderRadius: 6,
-                                background: "#f5f5f5",
-                              }}
-                            />
-                            <Typography fontWeight={600}>
-                              {item.name}
-                            </Typography>
+                          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                            <img src={item.image || "/no-image.png"} alt={item.name} width={40} height={40} style={{ objectFit: "contain", borderRadius: 6 }} />
+                            {item.name}
                           </Box>
                         </TableCell>
-                        <TableCell align="right">
-                          ${item.price.toLocaleString()}
-                        </TableCell>
+                        <TableCell align="right">${item.price.toLocaleString()}</TableCell>
                         <TableCell align="center">
                           <TextField
                             type="number"
                             size="small"
                             value={item.quantity}
-                            inputProps={{
-                              min: 1,
-                              style: { width: 50, textAlign: "center" },
-                            }}
-                            onChange={(e) =>
-                              updateQuantity(
-                                item.name,
-                                Math.max(1, Number(e.target.value)),
-                              )
-                            }
+                            inputProps={{ min: 1, style: { width: 50, textAlign: 'center', fontWeight: 600, fontSize: 16, borderRadius: 8 } }}
+                            sx={{ width: 60 }}
+                            onChange={e => updateQuantity(item.name, Math.max(1, Number(e.target.value)))}
                           />
                         </TableCell>
-                        <TableCell align="right">
-                          ${(item.price * item.quantity).toLocaleString()}
-                        </TableCell>
+                        <TableCell align="right">${(item.price * item.quantity).toLocaleString()}</TableCell>
                         <TableCell align="center">
                           <Button
                             color="error"
@@ -192,22 +179,16 @@ export const CarPage = () => {
               CheckOut
             </Typography>
             <Divider sx={{ mb: 2 }} />
-            <Box
-              sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}
-            >
+            <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
               <Typography>SubTotal</Typography>
               <Typography>${subtotal.toLocaleString()}</Typography>
             </Box>
-            <Box
-              sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}
-            >
+            <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
               <Typography>Descuento</Typography>
-              <Typography>${descuento.toLocaleString()}</Typography>
+              <Typography>{descuentoLabel}</Typography>
             </Box>
             <Divider sx={{ my: 2 }} />
-            <Box
-              sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}
-            >
+            <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
               <Typography variant="h6" fontWeight={700}>
                 Total
               </Typography>
