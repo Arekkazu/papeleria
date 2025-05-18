@@ -10,13 +10,14 @@ Este proyecto está enfocado en el desarrollo frontend, por lo que se centra en 
 
 - **React**: Librería JavaScript para construir la interfaz de usuario.
 - **CSS**: Para el estilo y diseño visual de la aplicación.
+- **Material UI** Estilo mas moderno y minimalista
 
 ## Instalación
 
 1. Clona este repositorio a tu máquina local:
 
    ```bash
-   git clone https://github.com/tu-usuario/papeleria.git
+   git clone https://github.com/arekkasu/papeleria.git
    ```
 
 2. Navega al directorio del proyecto:
@@ -34,10 +35,10 @@ Este proyecto está enfocado en el desarrollo frontend, por lo que se centra en 
 4. Ejecuta la aplicación en modo de desarrollo:
 
    ```bash
-   npm start
+   npm run dev
    ```
 
-   Esto abrirá la aplicación en tu navegador, generalmente en `http://localhost:3000`.
+   Esto abrirá la aplicación en tu navegador, generalmente en `http://localhost:5173`.
 
 ## Estructura del Proyecto
 
