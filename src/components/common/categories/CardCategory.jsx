@@ -19,13 +19,15 @@ export const CardCategory = ({ name = "Categoría", image }) => {
     <Card
       sx={{
         width: 260,
-        height: 240,
+        height: 260, // Cuadrado perfecto
         borderRadius: 3,
         boxShadow: 2,
         transition: "transform 0.2s",
         m: "auto",
         display: "flex",
         flexDirection: "column",
+        overflow: "hidden",
+        position: "relative",
         "&:hover": {
           transform: "translateY(-4px)",
           boxShadow: 5,
@@ -34,17 +36,19 @@ export const CardCategory = ({ name = "Categoría", image }) => {
     >
       <CardActionArea
         onClick={handleCategoryClick}
-        sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
+        {/* Contenedor de la imagen */}
         <Box
           sx={{
-            height: 160,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            bgcolor: "#f5f8fa",
-            borderTopLeftRadius: 12,
-            borderTopRightRadius: 12,
+            flex: 1,
+            width: "100%",
+            overflow: "hidden",
+            position: "relative",
           }}
         >
           <CardMedia
@@ -52,20 +56,26 @@ export const CardCategory = ({ name = "Categoría", image }) => {
             image={image}
             alt={name}
             sx={{
-              objectFit: "contain",
-              width: "90%",
-              height: "90%",
-              p: 1,
+              objectFit: "cover",
+              width: "100%",
+              height: "100%",
+              position: "absolute",
+              top: 0,
+              left: 0,
             }}
           />
         </Box>
+
+        {/* Texto superpuesto */}
         <CardContent
           sx={{
-            flexGrow: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            bgcolor: "rgba(0, 0, 0, 0.7)",
             p: 2,
+            backdropFilter: "blur(4px)",
           }}
         >
           <Typography
@@ -73,11 +83,9 @@ export const CardCategory = ({ name = "Categoría", image }) => {
             align="center"
             fontWeight={700}
             sx={{
+              color: "#fff",
               lineHeight: 1.2,
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
+              textShadow: "0 2px 4px rgba(0,0,0,0.5)",
             }}
           >
             {name}

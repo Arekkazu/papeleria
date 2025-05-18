@@ -16,6 +16,7 @@ const categories = {
   "Adhesivos y Corrección":
     "https://img.freepik.com/free-photo/crop-hands-sealing-box_23-2147758728.jpg?t=st=1746978999~exp=1746982599~hmac=993b752adf7ef18b4e15e38249912f395a6efbb13e8748225f6ffd2d7a8b667c",
 };
+
 export const DiscoverCategory = () => {
   return (
     <Box
@@ -53,10 +54,9 @@ export const DiscoverCategory = () => {
         {Object.entries(categories).map(([name, image]) => (
           <Grid
             item
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
+            xs={12} // 1 columna en móvil
+            sm={6} // 2 columnas en tablet
+            md={4} // 3 columnas en desktop
             key={name}
             sx={{
               display: "flex",
