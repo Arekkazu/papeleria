@@ -1,7 +1,6 @@
 import {
   Box,
   Typography,
-  Grid,
   Button,
   useTheme,
   useMediaQuery,
@@ -202,7 +201,7 @@ export const MainPage = () => {
       </main>
 
       <footer>
-        <Footer /> {/* Exportancion del componente */}
+        <Footer />
       </footer>
     </Box>
   );
