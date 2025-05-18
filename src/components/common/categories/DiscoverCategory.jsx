@@ -5,8 +5,6 @@ import { CardCategory } from "./CardCategory";
 const categories = {
   Escolar:
     "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  Oficina:
-    "https://poweredbyorange.com/wp-content/uploads/2019/09/Desk-Clutter-201908-003-720x475.jpg",
   "Papeles y Formatos":
     "https://img.freepik.com/free-photo/still-life-stacks-papers-documents_23-2151118315.jpg?t=st=1746977767~exp=1746981367~hmac=448e0bc761f5bdfd22d669ded6c8b21a133c168e13a0a17482379990716e7e08",
   "Archivado y Organización":
