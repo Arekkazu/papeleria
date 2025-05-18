@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useCart } from "../../../hooks/useCart";
-import { formatPrice } from "../../../utils/helpers";
+import { formatPrice } from "../../../utils/helpers"; // Importación correcta
 
 export const ProductCard = ({ product, onView }) => {
   const { addToCart } = useCart();
