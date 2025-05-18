@@ -19,7 +19,7 @@ export const CardCategory = ({ name = "Categoría", image }) => {
     <Card
       sx={{
         width: 260,
-        height: 260, // Cuadrado perfecto
+        height: 260,
         borderRadius: 3,
         boxShadow: 2,
         transition: "transform 0.2s",
@@ -73,7 +73,7 @@ export const CardCategory = ({ name = "Categoría", image }) => {
             bottom: 0,
             left: 0,
             right: 0,
-            bgcolor: "rgba(0, 0, 0, 0.7)",
+            bgcolor: "rgba(238, 233, 233, 0.7)",
             p: 2,
             backdropFilter: "blur(4px)",
           }}
@@ -83,9 +83,8 @@ export const CardCategory = ({ name = "Categoría", image }) => {
             align="center"
             fontWeight={700}
             sx={{
-              color: "#fff",
+              color: "rgba(0,0,0,0.5)",
               lineHeight: 1.2,
-              textShadow: "0 2px 4px rgba(0,0,0,0.5)",
             }}
           >
             {name}
