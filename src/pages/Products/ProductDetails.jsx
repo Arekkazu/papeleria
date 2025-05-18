@@ -1,5 +1,6 @@
 import { Container, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
+import { DiscoverCategory } from "../../components/common/categories/DiscoverCategory";
 import { ProductDetailView } from "../../components/common/products/ProductDetailView";
 import { ProductNotFoundView } from "../../components/common/products/ProductNotFoundView";
 import { productos } from "../../utils/productos";
@@ -27,6 +28,8 @@ export const ProductDetailsPage = () => {
           </Container>
         )}
       </main>
+
+      <DiscoverCategory />
 
       <footer>
         <Footer />
