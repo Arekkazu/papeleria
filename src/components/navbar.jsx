@@ -139,7 +139,10 @@ export const Navbar = () => {
             <Box sx={{ mb: 3 }}>
               <HeaderSearch sx={{ width: "100%" }}>
                 <SearchIconStyled />
-                <SearchInput placeholder="Buscar..." inputProps={{ "aria-label": "buscar" }} />
+                <SearchInput
+                  placeholder="Buscar..."
+                  inputProps={{ "aria-label": "buscar" }}
+                />
               </HeaderSearch>
             </Box>
 
@@ -148,7 +151,11 @@ export const Navbar = () => {
             {/* Menú móvil */}
             <List>
               {menuItems.map(({ label, path }) => (
-                <Link key={label} to={path} style={{ textDecoration: "none", color: "inherit" }}>
+                <Link
+                  key={label}
+                  to={path}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
                   <ListItem button sx={{ py: 1.5 }}>
                     <ListItemText
                       primary={label}
@@ -163,7 +170,10 @@ export const Navbar = () => {
 
             {/* Accesos rápidos */}
             <List>
-              <Link to="/cart" style={{ textDecoration: "none", color: "inherit" }}>
+              <Link
+                to="/cart"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
                 <ListItem button sx={{ py: 1.5 }}>
                   <ListItemText
                     primary="Carrito"
@@ -171,7 +181,10 @@ export const Navbar = () => {
                   />
                 </ListItem>
               </Link>
-              <Link to="/login" style={{ textDecoration: "none", color: "inherit" }}>
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
                 <ListItem button sx={{ py: 1.5 }}>
                   <ListItemText
                     primary="Mi cuenta"

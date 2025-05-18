@@ -4,7 +4,7 @@ import { Navbar } from "../../components/navbar";
 import Footer from "../../components/footer";
 import { DragonBallContainer } from "../../components/common/DragonBall/DragonBallContainer";
 
-const ApiPage = () => {
+export const ApiPage = () => {
   return (
     <ApiContainer>
       <header>
@@ -31,5 +31,3 @@ const ApiPage = () => {
     </ApiContainer>
   );
 };
-
-export default ApiPage; 

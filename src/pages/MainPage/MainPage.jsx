@@ -1,8 +1,6 @@
-import { ContainerHeader } from "./MainPage.styles";
 import {
   Box,
   Typography,
-  Grid,
   Button,
   useTheme,
   useMediaQuery,
@@ -10,9 +8,9 @@ import {
 import { DiscoverCategory } from "../../components/common/categories/DiscoverCategory";
 import { Navbar } from "../../components/navbar";
 import Footer from "../../components/footer";
-import { ProductCard } from "../../components/common/products/ProductCard";
-import { FeaturedProductsGrid } from "../../components/common/products/FeaturedProductsGrid";
 import HeroBannerImg from "../../assets/images/hero.jpg";
+import { Link } from "react-router-dom";
+
 export const MainPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -76,6 +74,8 @@ export const MainPage = () => {
               </Typography>
               <Button
                 variant="contained"
+                component={Link}
+                to="/products"
                 sx={{
                   bgcolor: "#fff",
                   color: "#2697a6",
@@ -175,6 +175,8 @@ export const MainPage = () => {
             </Typography>
             <Button
               variant="contained"
+              component={Link}
+              to="/products"
               sx={{
                 bgcolor: "#2697a6",
                 color: "#fff",
@@ -199,7 +201,7 @@ export const MainPage = () => {
       </main>
 
       <footer>
-        <Footer /> {/* Exportancion del componente */}
+        <Footer />
       </footer>
     </Box>
   );

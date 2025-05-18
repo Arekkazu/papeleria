@@ -1,61 +1,36 @@
-import { useSearchParams } from "react-router-dom";
-import { productos } from "../../utils/productos";
-import { Box } from "@mui/material";
+import { Container, Box } from "@mui/material";
+import { useParams } from "react-router-dom";
 import { DiscoverCategory } from "../../components/common/categories/DiscoverCategory";
-import { Navbar } from "../../components/navbar";
-import Footer from "../../components/footer";
-import { NavBox } from "../../components/common/layouts/NavBarBox/NavBarBox";
 import { ProductDetailView } from "../../components/common/products/ProductDetailView";
 import { ProductNotFoundView } from "../../components/common/products/ProductNotFoundView";
+import { productos } from "../../utils/productos";
+import { Navbar } from "../../components/navbar";
+import Footer from "../../components/footer";
 
-function normalize(str) {
-  return decodeURIComponent(str || "")
-    .toLowerCase()
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-export const ProductsDetailsPage = () => {
-  const [searchParams] = useSearchParams();
-  const name = searchParams.get("name");
-  const normalizedName = normalize(name);
-  const producto = productos.find(p => normalize(p.name) === normalizedName);
+export const ProductDetailsPage = () => {
+  const { productName } = useParams();
+  const product = productos.find(
+    (p) => p.name.toLowerCase() === productName?.toLowerCase()
+  );
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <header>
-        <NavBox>
-          <Navbar />
-        </NavBox>
+        <Navbar />
       </header>
-      <main>
-        <Box sx={{
-          minHeight: '70vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          pt: { xs: 6, md: 10 },
-          px: { xs: 1, md: 4 },
-        }}>
-          <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-            {producto ? (
-              <ProductDetailView producto={producto} />
-            ) : (
-              <ProductNotFoundView />
-            )}
-          </Box>
-          <Box sx={{ width: '100%' }}>
-            <DiscoverCategory />
-          </Box>
-        </Box>
+
+      <main style={{ flex: 1 }}>
+        {product ? (
+          <ProductDetailView producto={product} />
+        ) : (
+          <Container maxWidth="md" sx={{ py: 8 }}>
+            <ProductNotFoundView />
+          </Container>
+        )}
       </main>
+
+      <DiscoverCategory />
+
       <footer>
         <Footer />
       </footer>
