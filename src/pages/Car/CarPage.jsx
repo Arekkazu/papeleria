@@ -29,7 +29,7 @@ export const CarPage = () => {
   // Calcular totales
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
-    0,
+    0
   );
   const descuento = 0; // Aquí podrías aplicar lógica de descuento
   const total = subtotal - descuento;
@@ -77,7 +77,7 @@ export const CarPage = () => {
               p: 3,
               borderRadius: 4,
               minWidth: { xs: 0, md: 350 },
-              width: { xs: '100%', sm: 400, md: 'auto' },
+              width: { xs: "100%", sm: 400, md: "auto" },
               maxWidth: 800,
               mt: 4,
               boxSizing: "border-box",
@@ -88,7 +88,7 @@ export const CarPage = () => {
               variant="h4"
               sx={{ mb: 3, fontWeight: 700, mt: 2, textAlign: "left" }}
             >
-              Tu Mochila
+              Tu Carrito
             </Typography>
             <TableContainer>
               <Table>
@@ -150,7 +150,7 @@ export const CarPage = () => {
                             onChange={(e) =>
                               updateQuantity(
                                 item.name,
-                                Math.max(1, Number(e.target.value)),
+                                Math.max(1, Number(e.target.value))
                               )
                             }
                           />
@@ -181,10 +181,10 @@ export const CarPage = () => {
               p: 3,
               borderRadius: 4,
               minWidth: { xs: 0, md: 260 },
-              width: { xs: '100%', sm: 350, md: 320 },
+              width: { xs: "100%", sm: 350, md: 320 },
               maxWidth: 400,
               maxHeight: 320,
-              alignSelf: { xs: 'center', md: 'flex-start' },
+              alignSelf: { xs: "center", md: "flex-start" },
               mt: { xs: 0, md: 7 },
             }}
           >
