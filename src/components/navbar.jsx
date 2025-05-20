@@ -57,6 +57,7 @@ export const Navbar = () => {
     { label: "Inicio", path: "/" },
     { label: "Quiénes somos", path: "/about" },
     { label: "Productos", path: "/products" },
+    { label: "API", path: "/api" },
   ];
 
   return (

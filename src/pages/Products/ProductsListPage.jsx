@@ -8,6 +8,8 @@ import {
   InputAdornment,
   MenuItem,
   useTheme,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { ProductCard } from "../../components/common/products/ProductCard";
@@ -23,6 +25,7 @@ export const ProductListPage = () => {
   const [selectedCategory, setSelectedCategory] = useState(
     searchParams.get("category") || ""
   );
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   // Actualizar parámetros de URL cuando cambia la categoría
   useEffect(() => {
@@ -45,6 +48,15 @@ export const ProductListPage = () => {
 
   // Extraer categorías únicas
   const categories = [...new Set(productos.map((p) => p.category))];
+
+  const handleAddToCartSnackbar = () => {
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") return;
+    setSnackbarOpen(false);
+  };
 
   return (
     <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
@@ -104,7 +116,7 @@ export const ProductListPage = () => {
           </Box>
 
           {/* Listado de Productos */}
-          <Grid container spacing={4}>
+          <Grid container spacing={4} justifyContent="center">
             {filteredProducts.length === 0 ? (
               <Grid item xs={12}>
                 <Typography variant="h5" textAlign="center" sx={{ py: 4 }}>
@@ -113,12 +125,22 @@ export const ProductListPage = () => {
               </Grid>
             ) : (
               filteredProducts.map((product) => (
-                <Grid item xs={12} sm={6} md={4} key={product.name}>
-                  <ProductCard product={product} />
+                <Grid item xs={12} sm={6} md={4} lg={3} key={product.name} display="flex" justifyContent="center">
+                  <ProductCard product={product} onAdd={handleAddToCartSnackbar} />
                 </Grid>
               ))
             )}
           </Grid>
+          <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={2500}
+            onClose={handleSnackbarClose}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          >
+            <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: "100%" }}>
+              Artículo agregado al carrito
+            </Alert>
+          </Snackbar>
         </Container>
       </main>
 

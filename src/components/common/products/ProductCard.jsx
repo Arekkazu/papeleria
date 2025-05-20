@@ -11,12 +11,13 @@ import { Link } from "react-router-dom";
 import { useCart } from "../../../hooks/useCart";
 import { formatPrice } from "../../../utils/helpers"; // Importación correcta
 
-export const ProductCard = ({ product, onView }) => {
+export const ProductCard = ({ product, onView, onAdd }) => {
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
     addToCart(product, 1);
     onView?.();
+    if (onAdd) onAdd();
   };
 
   return (
@@ -36,14 +37,16 @@ export const ProductCard = ({ product, onView }) => {
           height: 180,
           borderTopLeftRadius: 12,
           borderTopRightRadius: 12,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <CardMedia
           component="img"
-          height="140"
           image={product.image}
           alt={product.name}
-          sx={{ objectFit: "contain", p: 2 }}
+          sx={{ objectFit: "contain", height: 180, width: "100%" }}
         />
       </Box>
       <CardContent>
