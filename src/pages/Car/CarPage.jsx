@@ -44,7 +44,7 @@ export const CarPage = () => {
   // Calcular totales
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
-    0,
+    0
   );
   const total = subtotal - descuento;
 
@@ -93,7 +93,7 @@ export const CarPage = () => {
               p: 3,
               borderRadius: 4,
               minWidth: { xs: 0, md: 350 },
-              width: { xs: '100%', sm: 400, md: 'auto' },
+              width: { xs: "100%", sm: 400, md: "auto" },
               maxWidth: 800,
               mt: 4,
               boxSizing: "border-box",
@@ -104,7 +104,7 @@ export const CarPage = () => {
               variant="h4"
               sx={{ mb: 3, fontWeight: 700, mt: 2, textAlign: "left" }}
             >
-              Tu Mochila
+              Tu Carrito
             </Typography>
             <TableContainer>
               <Table>
@@ -138,10 +138,17 @@ export const CarPage = () => {
                           <TextField
                             type="number"
                             size="small"
-                            value={item.quantity}
-                            inputProps={{ min: 1, style: { width: 50, textAlign: 'center', fontWeight: 600, fontSize: 16, borderRadius: 8 } }}
-                            sx={{ width: 60 }}
-                            onChange={e => updateQuantity(item.name, Math.max(1, Number(e.target.value)))}
+                            value={item.quantity
+                            inputProps={{
+                              min: 1,
+                              style: { width: 50, textAlign: "center" },
+                            }}
+                            onChange={(e) =>
+                              updateQuantity(
+                                item.name,
+                                Math.max(1, Number(e.target.value))
+                              )
+                            }
                           />
                         </TableCell>
                         <TableCell align="right">${(item.price * item.quantity).toLocaleString()}</TableCell>
@@ -168,10 +175,10 @@ export const CarPage = () => {
               p: 3,
               borderRadius: 4,
               minWidth: { xs: 0, md: 260 },
-              width: { xs: '100%', sm: 350, md: 320 },
+              width: { xs: "100%", sm: 350, md: 320 },
               maxWidth: 400,
               maxHeight: 320,
-              alignSelf: { xs: 'center', md: 'flex-start' },
+              alignSelf: { xs: "center", md: "flex-start" },
               mt: { xs: 0, md: 7 },
             }}
           >
