@@ -13,7 +13,7 @@ export const ProductDetailView = ({ producto }) => {
   //Funcion OnClick para agregar al carrito
   const handleAdd = () => {
     addToCart(producto, cantidad);
-    setMsg(`Se agregaron ${cantidad} unidad${cantidad > 1 ? 'es' : ''} de "${producto.name}" a la mochila.`);
+    setMsg(`Se agregaron ${cantidad} unidad${cantidad > 1 ? 'es' : ''} de "${producto.name}" al carrito.`);
     setOpen(true);
   };
 
@@ -120,7 +120,7 @@ export const ProductDetailView = ({ producto }) => {
                   onChange={e => setCantidad(Math.max(1, Number(e.target.value)))}
                 />
               </Box>
-              <Button variant="outlined" fullWidth sx={{ mb: 1, fontWeight: 700, py: 1.2, fontSize: 16 }} onClick={handleAdd}>Agregar a la mochila</Button>
+              <Button variant="outlined" fullWidth sx={{ mb: 1, fontWeight: 700, py: 1.2, fontSize: 16 }} onClick={handleAdd}>Agregar al carrito</Button>
               <Button variant="contained" fullWidth sx={{ fontWeight: 700, py: 1.2, fontSize: 16 }} onClick={handleBuy}>Comprar Ahora</Button>
             </Box>
           </Box>
