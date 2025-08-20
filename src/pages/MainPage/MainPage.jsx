@@ -4,16 +4,44 @@ import {
   Button,
   useTheme,
   useMediaQuery,
+  IconButton,
 } from "@mui/material";
 import { DiscoverCategory } from "../../components/common/categories/DiscoverCategory";
 import { Navbar } from "../../components/navbar";
 import Footer from "../../components/footer";
 import HeroBannerImg from "../../assets/images/hero.jpg";
 import { Link } from "react-router-dom";
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import carrusel from "../../assets/images/carrusel.jpg"
+import carrusel2 from "../../assets/images/carrusel2.jpg"
+import carrusel3 from "../../assets/images/carrusel3.jpg"
+import carrusel4 from "../../assets/images/carrusel4.jpg"
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useRef } from 'react';
+
+
+
+const images = [carrusel, carrusel3, carrusel2, carrusel4];
+
 
 export const MainPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const sliderRef = useRef(null);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
+  };
 
   return (
     <Box
@@ -193,6 +221,77 @@ export const MainPage = () => {
             </Button>
           </Box>
         </Box>
+
+        <Box
+      sx={{
+        position: 'relative',
+        width: '100%',
+        maxWidth: 1600,
+        margin: '20px auto',
+        overflow: 'hidden',
+        borderRadius: 2,
+        boxShadow: 3,
+      }}
+    >
+      {/* Carrusel */}
+      <Slider ref={sliderRef} {...settings}>
+        {images.map((img, index) => (
+          <Box
+      key={index}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <img
+      src={img}
+      alt={`banner-${index}`}
+      style={{
+        width: "100%",
+        height: "410px",  
+        objectFit: "cover",
+        display: "block",
+  }}
+/>
+    </Box>
+        ))}
+      </Slider>
+
+      {/* Botón anterior */}
+      <IconButton
+        onClick={() => sliderRef.current?.slickPrev()}
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: 10,
+          transform: 'translateY(-50%)',
+          backgroundColor: 'rgba(0,0,0,0.4)',
+          color: 'white',
+          '&:hover': { backgroundColor: 'rgba(0,0,0,0.6)' },
+          zIndex: 1,
+        }}
+      >
+        <ArrowBackIosIcon />
+      </IconButton>
+
+      {/* Botón siguiente */}
+      <IconButton
+        onClick={() => sliderRef.current?.slickNext()}
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          right: 10,
+          transform: 'translateY(-50%)',
+          backgroundColor: 'rgba(0,0,0,0.4)',
+          color: 'white',
+          '&:hover': { backgroundColor: 'rgba(0,0,0,0.6)' },
+          zIndex: 1,
+        }}
+      >
+        <ArrowForwardIosIcon />
+      </IconButton>
+    </Box>
 
         {/* Categorías */}
         <DiscoverCategory />
