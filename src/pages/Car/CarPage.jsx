@@ -138,7 +138,7 @@ export const CarPage = () => {
                           <TextField
                             type="number"
                             size="small"
-                            value={item.quantity
+                            value={item.quantity}
                             inputProps={{
                               min: 1,
                               style: { width: 50, textAlign: "center" },
