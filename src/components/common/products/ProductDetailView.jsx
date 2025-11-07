@@ -1,25 +1,55 @@
 import { Box, Typography, Button, TextField, Paper, Divider, Snackbar, Alert } from "@mui/material";
 import { useState } from "react";
 import { useCart } from "../../../hooks/useCart";
+import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export const ProductDetailView = ({ producto }) => {
   const [cantidad, setCantidad] = useState(1);
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState("");
+  const [showAuthAlert, setShowAuthAlert] = useState(false);
   const { addToCart } = useCart();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   //Funcion OnClick para agregar al carrito
-  const handleAdd = () => {
-    addToCart(producto, cantidad);
-    setMsg(`Se agregaron ${cantidad} unidad${cantidad > 1 ? 'es' : ''} de "${producto.name}" al carrito.`);
-    setOpen(true);
+  const handleAdd = async () => {
+    if (!isAuthenticated()) {
+      setShowAuthAlert(true);
+      return;
+    }
+
+    try {
+      await addToCart(producto, cantidad);
+      setMsg(`Se agregaron ${cantidad} unidad${cantidad > 1 ? 'es' : ''} de "${producto.name}" al carrito.`);
+      setOpen(true);
+    } catch (error) {
+      console.error("Error al agregar al carrito:", error);
+    }
   };
 
-  const handleBuy = () => {
-    addToCart(producto, cantidad);
-    navigate("/cart");
+  const handleBuy = async () => {
+    if (!isAuthenticated()) {
+      setShowAuthAlert(true);
+      return;
+    }
+
+    try {
+      await addToCart(producto, cantidad);
+      navigate("/cart");
+    } catch (error) {
+      console.error("Error al agregar al carrito:", error);
+    }
+  };
+
+  const handleCloseAuthAlert = () => {
+    setShowAuthAlert(false);
+  };
+
+  const handleGoToLogin = () => {
+    setShowAuthAlert(false);
+    navigate("/login");
   };
 
   return (
@@ -126,10 +156,32 @@ export const ProductDetailView = ({ producto }) => {
           </Box>
         </Box>
       </Paper>
+      
       {/* SnackBar Para mostrar brevemente la alerta de que se agrego al carrito */}
       <Snackbar open={open} autoHideDuration={3000} onClose={() => setOpen(false)} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
         <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '100%' }}>
           {msg}
+        </Alert>
+      </Snackbar>
+
+      {/* Alerta para usuarios no autenticados */}
+      <Snackbar
+        open={showAuthAlert}
+        autoHideDuration={6000}
+        onClose={handleCloseAuthAlert}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseAuthAlert}
+          severity="warning"
+          sx={{ width: "100%" }}
+          action={
+            <Button color="inherit" size="small" onClick={handleGoToLogin}>
+              Iniciar Sesión
+            </Button>
+          }
+        >
+          Debes iniciar sesión para agregar productos al carrito
         </Alert>
       </Snackbar>
     </Box>

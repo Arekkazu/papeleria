@@ -21,24 +21,47 @@ import { useCart } from "../../hooks/useCart";
 import { useState } from "react";
 import { CheckoutOk } from "../../components/common/snackbar/checkoutOk";
 import { CheckoutBad } from "../../components/common/snackbar/checkoutBad";
+import { DiscountCodeInput } from "../../components/common/discount/DiscountCodeInput";
+import { useAuth } from "../../context/AuthContext";
 
 const DISCOUNT_KEY = "dragonball_discount";
+const APPLIED_DISCOUNT_KEY = "applied_discount";
 
 export const CarPage = () => {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
+  const { user, isAuthenticated } = useAuth();
   const [open, setOpen] = useState(false);
+  const [appliedDiscount, setAppliedDiscount] = useState(null);
 
-  // Leer descuento de localStorage
+  // Leer descuento de localStorage (Dragon Ball o aplicado manualmente)
   let descuento = 0;
   let descuentoLabel = "$0";
-  const discountData = localStorage.getItem(DISCOUNT_KEY);
-  if (discountData) {
+  let discountInfo = null;
+  
+  // Primero intentar con descuento aplicado manualmente
+  const appliedDiscountData = localStorage.getItem(APPLIED_DISCOUNT_KEY);
+  if (appliedDiscountData) {
     try {
-      const { discount } = JSON.parse(discountData);
-      const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-      descuento = Math.round(subtotal * discount);
-      descuentoLabel = `-$${descuento.toLocaleString()}`;
+      const data = JSON.parse(appliedDiscountData);
+      discountInfo = data;
     } catch {}
+  }
+  
+  // Si no hay descuento aplicado, usar el de Dragon Ball
+  if (!discountInfo) {
+    const dragonBallDiscountData = localStorage.getItem(DISCOUNT_KEY);
+    if (dragonBallDiscountData) {
+      try {
+        discountInfo = JSON.parse(dragonBallDiscountData);
+      } catch {}
+    }
+  }
+  
+  // Calcular descuento
+  if (discountInfo) {
+    const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    descuento = Math.round(subtotal * discountInfo.discount);
+    descuentoLabel = `-$${descuento.toLocaleString()}`;
   }
 
   // Calcular totales
@@ -50,13 +73,20 @@ export const CarPage = () => {
 
   const handleFinish = () => {
     setOpen(true);
-    // Limpiar descuento al finalizar compra
+    // Limpiar descuentos al finalizar compra
     localStorage.removeItem(DISCOUNT_KEY);
+    localStorage.removeItem(APPLIED_DISCOUNT_KEY);
   };
 
   const handleClose = () => {
     setOpen(false);
     clearCart();
+  };
+
+  const handleDiscountApplied = (discount) => {
+    setAppliedDiscount(discount);
+    // Forzar re-render
+    window.location.reload();
   };
 
   return (
@@ -100,6 +130,23 @@ export const CarPage = () => {
               mb: { xs: 3, md: 0 },
             }}
           >
+            {/* Mensaje de bienvenida */}
+            {isAuthenticated() && (
+              <Box 
+                sx={{ 
+                  mb: 3, 
+                  p: 2, 
+                  bgcolor: "primary.light", 
+                  borderRadius: 2,
+                  textAlign: "center"
+                }}
+              >
+                <Typography variant="h6" fontWeight={600} color="primary.dark">
+                  Bienvenido, {user?.username}! 🛒
+                </Typography>
+              </Box>
+            )}
+
             <Typography
               variant="h4"
               sx={{ mb: 3, fontWeight: 700, mt: 2, textAlign: "left" }}
@@ -126,7 +173,7 @@ export const CarPage = () => {
                     </TableRow>
                   ) : (
                     cart.map((item, idx) => (
-                      <TableRow key={item.name + idx}>
+                      <TableRow key={item._id || item.name + idx}>
                         <TableCell>
                           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                             <img src={item.image || "/no-image.png"} alt={item.name} width={40} height={40} style={{ objectFit: "contain", borderRadius: 6 }} />
@@ -145,7 +192,7 @@ export const CarPage = () => {
                             }}
                             onChange={(e) =>
                               updateQuantity(
-                                item.name,
+                                item._id,
                                 Math.max(1, Number(e.target.value))
                               )
                             }
@@ -155,7 +202,7 @@ export const CarPage = () => {
                         <TableCell align="center">
                           <Button
                             color="error"
-                            onClick={() => removeFromCart(item.name)}
+                            onClick={() => removeFromCart(item._id)}
                             size="small"
                           >
                             Eliminar
@@ -177,7 +224,7 @@ export const CarPage = () => {
               minWidth: { xs: 0, md: 260 },
               width: { xs: "100%", sm: 350, md: 320 },
               maxWidth: 400,
-              maxHeight: 320,
+              maxHeight: 450,
               alignSelf: { xs: "center", md: "flex-start" },
               mt: { xs: 0, md: 7 },
             }}
@@ -186,14 +233,27 @@ export const CarPage = () => {
               CheckOut
             </Typography>
             <Divider sx={{ mb: 2 }} />
+            
+            {/* Componente para aplicar código de descuento */}
+            <DiscountCodeInput onDiscountApplied={handleDiscountApplied} />
+            
             <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
               <Typography>SubTotal</Typography>
               <Typography>${subtotal.toLocaleString()}</Typography>
             </Box>
             <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
               <Typography>Descuento</Typography>
-              <Typography>{descuentoLabel}</Typography>
+              <Typography color={descuento > 0 ? "success.main" : "inherit"}>
+                {descuentoLabel}
+              </Typography>
             </Box>
+            {discountInfo && (
+              <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
+                <Typography variant="caption" color="text.secondary">
+                  Código: {discountInfo.code || 'Dragon Ball'}
+                </Typography>
+              </Box>
+            )}
             <Divider sx={{ my: 2 }} />
             <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
               <Typography variant="h6" fontWeight={700}>

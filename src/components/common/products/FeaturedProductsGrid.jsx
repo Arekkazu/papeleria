@@ -1,11 +1,30 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Grid, CircularProgress, Alert } from "@mui/material";
 import { ProductCard } from "./ProductCard";
-import { productos } from "../../../utils/productos";
+import { useProducts } from "../../../hooks/useProducts";
 import { useNavigate } from "react-router-dom";
 
 export const FeaturedProductsGrid = () => {
   const navigate = useNavigate();
-  const featuredProducts = productos.filter((p) => p.featured).slice(0, 8);
+  const { products, loading, error } = useProducts();
+  
+  // Tomar los primeros 8 productos como destacados
+  const featuredProducts = products.slice(0, 8);
+
+  if (loading) {
+    return (
+      <Box sx={{ my: 6, px: { xs: 2, md: 4 }, textAlign: 'center' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box sx={{ my: 6, px: { xs: 2, md: 4 } }}>
+        <Alert severity="error">{error}</Alert>
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ my: 6, px: { xs: 2, md: 4 } }}>
@@ -21,8 +40,8 @@ export const FeaturedProductsGrid = () => {
         Descubre los productos más populares
       </Typography>
       <Grid container spacing={3} justifyContent="center">
-        {featuredProducts.map((product) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={product.name}>
+        {featuredProducts.map((product, index) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={product._id || product.name + index}>
             <ProductCard
               product={product}
               onView={() =>

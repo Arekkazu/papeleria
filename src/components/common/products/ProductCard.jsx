@@ -6,18 +6,43 @@ import {
   CardActions,
   Button,
   Box,
+  Snackbar,
+  Alert,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../../hooks/useCart";
+import { useAuth } from "../../../context/AuthContext";
 import { formatPrice } from "../../../utils/helpers"; // Importación correcta
+import { useState } from "react";
 
 export const ProductCard = ({ product, onView, onAdd }) => {
   const { addToCart } = useCart();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const [showAuthAlert, setShowAuthAlert] = useState(false);
 
-  const handleAddToCart = () => {
-    addToCart(product, 1);
-    onView?.();
-    if (onAdd) onAdd();
+  const handleAddToCart = async () => {
+    if (!isAuthenticated()) {
+      setShowAuthAlert(true);
+      return;
+    }
+
+    try {
+      await addToCart(product, 1);
+      onView?.();
+      if (onAdd) onAdd();
+    } catch (error) {
+      console.error("Error al agregar al carrito:", error);
+    }
+  };
+
+  const handleCloseAlert = () => {
+    setShowAuthAlert(false);
+  };
+
+  const handleGoToLogin = () => {
+    setShowAuthAlert(false);
+    navigate("/login");
   };
 
   return (
@@ -81,6 +106,27 @@ export const ProductCard = ({ product, onView, onAdd }) => {
           Añadir
         </Button>
       </CardActions>
+
+      {/* Alerta para usuarios no autenticados */}
+      <Snackbar
+        open={showAuthAlert}
+        autoHideDuration={6000}
+        onClose={handleCloseAlert}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseAlert}
+          severity="warning"
+          sx={{ width: "100%" }}
+          action={
+            <Button color="inherit" size="small" onClick={handleGoToLogin}>
+              Iniciar Sesión
+            </Button>
+          }
+        >
+          Debes iniciar sesión para agregar productos al carrito
+        </Alert>
+      </Snackbar>
     </Card>
   );
 };

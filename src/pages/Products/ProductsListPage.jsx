@@ -10,13 +10,14 @@ import {
   useTheme,
   Snackbar,
   Alert,
+  CircularProgress,
 } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { ProductCard } from "../../components/common/products/ProductCard";
 import Footer from "../../components/footer";
 import { Navbar } from "../../components/navbar";
 import { Search, Tune } from "@mui/icons-material";
-import { productos } from "../../utils/productos";
+import { useProducts } from "../../hooks/useProducts";
 
 export const ProductListPage = () => {
   const theme = useTheme();
@@ -26,6 +27,9 @@ export const ProductListPage = () => {
     searchParams.get("category") || ""
   );
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  
+  // Usar hook personalizado para productos
+  const { products: productos, loading, error } = useProducts();
 
   // Actualizar parámetros de URL cuando cambia la categoría
   useEffect(() => {
@@ -41,13 +45,13 @@ export const ProductListPage = () => {
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory
-      ? product.category === selectedCategory
+      ? (product.categoryName || product.category?.name) === selectedCategory
       : true;
     return matchesSearch && matchesCategory;
   });
 
   // Extraer categorías únicas
-  const categories = [...new Set(productos.map((p) => p.category))];
+  const categories = [...new Set(productos.map((p) => p.categoryName || p.category?.name).filter(Boolean))];
 
   const handleAddToCartSnackbar = () => {
     setSnackbarOpen(true);
@@ -79,6 +83,7 @@ export const ProductListPage = () => {
                   placeholder="Buscar producto..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  disabled={loading}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -96,6 +101,7 @@ export const ProductListPage = () => {
                   label="Categoría"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
+                  disabled={loading}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -115,22 +121,38 @@ export const ProductListPage = () => {
             </Grid>
           </Box>
 
+          {/* Mensajes de estado */}
+          {loading && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+              <CircularProgress />
+            </Box>
+          )}
+
+          {error && (
+            <Alert severity="error" sx={{ mb: 4 }}>
+              {error}
+            </Alert>
+          )}
+
           {/* Listado de Productos */}
-          <Grid container spacing={4} justifyContent="center">
-            {filteredProducts.length === 0 ? (
-              <Grid item xs={12}>
-                <Typography variant="h5" textAlign="center" sx={{ py: 4 }}>
-                  No se encontraron productos
-                </Typography>
-              </Grid>
-            ) : (
-              filteredProducts.map((product) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={product.name} display="flex" justifyContent="center">
-                  <ProductCard product={product} onAdd={handleAddToCartSnackbar} />
+          {!loading && !error && (
+            <Grid container spacing={4} justifyContent="center">
+              {filteredProducts.length === 0 ? (
+                <Grid item xs={12}>
+                  <Typography variant="h5" textAlign="center" sx={{ py: 4 }}>
+                    No se encontraron productos
+                  </Typography>
                 </Grid>
-              ))
-            )}
-          </Grid>
+              ) : (
+                filteredProducts.map((product, index) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={product._id || product.name + index} display="flex" justifyContent="center">
+                    <ProductCard product={product} onAdd={handleAddToCartSnackbar} />
+                  </Grid>
+                ))
+              )}
+            </Grid>
+          )}
+          
           <Snackbar
             open={snackbarOpen}
             autoHideDuration={2500}
