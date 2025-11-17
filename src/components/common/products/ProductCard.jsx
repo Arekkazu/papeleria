@@ -20,6 +20,8 @@ export const ProductCard = ({ product, onView, onAdd }) => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [showAuthAlert, setShowAuthAlert] = useState(false);
+  const [showStockError, setShowStockError] = useState(false);
+  const [stockErrorMessage, setStockErrorMessage] = useState("");
 
   const handleAddToCart = async () => {
     if (!isAuthenticated()) {
@@ -32,12 +34,23 @@ export const ProductCard = ({ product, onView, onAdd }) => {
       onView?.();
       if (onAdd) onAdd();
     } catch (error) {
-      console.error("Error al agregar al carrito:", error);
+      // Mostrar error de stock si existe
+      if (error.message && error.message.includes("Stock")) {
+        setStockErrorMessage(error.message);
+        setShowStockError(true);
+      } else {
+        // Solo loguear errores inesperados (no de validación de stock)
+        console.error("Error al agregar al carrito:", error);
+      }
     }
   };
 
   const handleCloseAlert = () => {
     setShowAuthAlert(false);
+  };
+
+  const handleCloseStockError = () => {
+    setShowStockError(false);
   };
 
   const handleGoToLogin = () => {
@@ -125,6 +138,22 @@ export const ProductCard = ({ product, onView, onAdd }) => {
           }
         >
           Debes iniciar sesión para agregar productos al carrito
+        </Alert>
+      </Snackbar>
+
+      {/* Alerta para errores de stock */}
+      <Snackbar
+        open={showStockError}
+        autoHideDuration={5000}
+        onClose={handleCloseStockError}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseStockError}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          {stockErrorMessage}
         </Alert>
       </Snackbar>
     </Card>
