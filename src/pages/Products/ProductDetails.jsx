@@ -1,15 +1,17 @@
-import { Container, Box } from "@mui/material";
+import { Container, Box, CircularProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { DiscoverCategory } from "../../components/common/categories/DiscoverCategory";
 import { ProductDetailView } from "../../components/common/products/ProductDetailView";
 import { ProductNotFoundView } from "../../components/common/products/ProductNotFoundView";
-import { productos } from "../../utils/productos";
+import { useProducts } from "../../hooks/useProducts";
 import { Navbar } from "../../components/navbar";
 import Footer from "../../components/footer";
 
 export const ProductDetailsPage = () => {
   const { productName } = useParams();
-  const product = productos.find(
+  const { products, loading, error } = useProducts();
+  
+  const product = products.find(
     (p) => p.name.toLowerCase() === productName?.toLowerCase()
   );
 
@@ -20,7 +22,11 @@ export const ProductDetailsPage = () => {
       </header>
 
       <main style={{ flex: 1 }}>
-        {product ? (
+        {loading ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+            <CircularProgress />
+          </Box>
+        ) : product ? (
           <ProductDetailView producto={product} />
         ) : (
           <Container maxWidth="md" sx={{ py: 8 }}>
